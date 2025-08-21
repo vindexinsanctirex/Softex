@@ -146,3 +146,15 @@ print(vermelhas is frutas_vermelhas)  # Verifica se são o mesmo objeto
 print(vermelhas == frutas_vermelhas)  # Verifica se têm o mesmo conteúdo
 
 print(sorted(cores))  # Imprime a lista cores ordenada
+
+frutas += ["maçã", "banana", "laranja", "maçã"]
+print(frutas)
+
+contagem_fruta = frutas.count("maçã")  # Conta quantas vezes "maçã" aparece na lista frutas
+print(contagem_fruta)
+if contagem_fruta > 1:
+    print("Tem mais de uma maçã")
+    while "maçã" in frutas:
+        frutas.remove("maçã")
+        print("Removida uma maçã")
+print(frutas)

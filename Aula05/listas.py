@@ -28,3 +28,45 @@ print("   Nova lista (índices 3 e 4):", nova_lista)
 
 print(type(lista_mista))
 print(lista_original[2])
+
+lista1 = []
+for num in range(10):
+    if num % 2 == 0:
+     lista1.append(num)
+print(lista1)
+
+lista2 = [num for num in range(10) if num % 2 == 0]
+print(lista2)
+
+matriz = [0 for i in range(3)]
+print(matriz)
+
+matriz = [[0 for j in range(3)] for i in range(3)]
+print(matriz)
+
+# Criando uma matriz 3x3x3 preenchida com zeros
+dimensoes = (3, 3, 3)  # (camadas, linhas, colunas)
+matriz_3d = [[[0 for _ in range(dimensoes[2])] 
+              for _ in range(dimensoes[1])] 
+             for _ in range(dimensoes[0])]
+print(matriz_3d)
+
+# Representando coordenadas em um espaço 3D 2x2x2
+espaco_3d = [
+    # Camada z=0
+    [
+        ['(0,0,0)', '(0,0,1)'],  # y=0
+        ['(0,1,0)', '(0,1,1)']   # y=1
+    ],
+    # Camada z=1
+    [
+        ['(1,0,0)', '(1,0,1)'],  # y=0
+        ['(1,1,0)', '(1,1,1)']   # y=1
+    ]
+]
+
+# Encontrando uma coordenada específica
+def encontrar_coordenada(x, y, z):
+    return espaco_3d[x][y][z]
+
+print(encontrar_coordenada(1, 0, 1))  # Saída: (1,0,1)
