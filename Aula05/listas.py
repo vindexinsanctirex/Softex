@@ -25,3 +25,6 @@ lista_original = [1, 2, 3, 4, 5, 6]
 nova_lista = lista_original[3:5]
 print("5) Lista original:", lista_original)
 print("   Nova lista (índices 3 e 4):", nova_lista)
+
+print(type(lista_mista))
+print(lista_original[2])
