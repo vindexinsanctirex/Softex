@@ -55,10 +55,13 @@ print(livros_interseccao)
 # dicionários e como identificar seus dados
 
 dicionário = { "nome": "João", "idade": 30, "cidade": "São Paulo", "livros": ["O Senhor dos Anéis", "Quo Vadis", "Brothers Karamazov", "Imitação de Cristo"], "cursos": { "Matemática", "História", "Inglês", "Geopolítica" }, "diplomas": { "Ensino Médio": "Completo", "Graduação": "Completo", "Pós": "Incompleto" } }
+dicionário2 = dicionário.copy()
 print(dicionário.get("nome"))
 print(dicionário.get("idade"))
 print(dicionário["livros"][2])
-dicionário["cursos"].add("Filosofia")
-print(dicionário["cursos"])
+print(dicionário2)
 dicionário["diplomas"]["Pós"] = "Completo"
+dicionário["cursos"].add("Filosofia")
+print(dicionário)
+print(dicionário["cursos"])
 print(dicionário["diplomas"]["Pós"])
