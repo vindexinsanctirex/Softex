@@ -51,3 +51,14 @@ print(livros_interseccao)
 # ou
 livros_interseccao = livros1 & livros2
 print(livros_interseccao)
+
+# dicionários e como identificar seus dados
+
+dicionário = { "nome": "João", "idade": 30, "cidade": "São Paulo", "livros": ["O Senhor dos Anéis", "Quo Vadis", "Brothers Karamazov", "Imitação de Cristo"], "cursos": { "Matemática", "História", "Inglês", "Geopolítica" }, "diplomas": { "Ensino Médio": "Completo", "Graduação": "Completo", "Pós": "Incompleto" } }
+print(dicionário.get("nome"))
+print(dicionário.get("idade"))
+print(dicionário["livros"][2])
+dicionário["cursos"].add("Filosofia")
+print(dicionário["cursos"])
+dicionário["diplomas"]["Pós"] = "Completo"
+print(dicionário["diplomas"]["Pós"])
