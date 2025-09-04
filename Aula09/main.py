@@ -44,7 +44,24 @@
 #     case _:
 #         print("Consoante")
 
-arquivo = open("teste.txt", "r")
+arquivo = open("Aula09/teste.txt", "r")
 conteudo = arquivo.read()
 print(conteudo)
+arquivo.close()
+
+# ou 
+
+arquivo = open("Aula09/teste.txt", "r")
+print(arquivo.read())
+arquivo.close()
+
+# ou
+
+with open("Aula09/teste.txt", "r") as arquivo:
+    print(arquivo.read())
+
+# ou
+
+arquivo = open("Aula09/teste.txt", "a")
+arquivo.write("\nAdicionando uma nova linha ao arquivo.")
 arquivo.close()
