@@ -1,0 +1,235 @@
+# 1. Classe Usuario base
+class Usuario:
+    def __init__(self, nome, email):
+        self.nome = nome
+        self.email = email
+    
+    def exibir_informacoes(self):
+        return f"Nome: {self.nome}, Email: {self.email}"
+    
+    def saudacao(self):
+        return "Olá, usuário"
+
+# 2. Classe Cliente que herda de Usuario
+class Cliente(Usuario):
+    def __init__(self, nome, email, saldo=0):
+        super().__init__(nome, email)  # Chama o construtor da classe pai
+        self.saldo = saldo
+    
+    def saudacao(self):  # Sobrescrevendo o método
+        return "Olá, cliente"
+    
+    def exibir_informacoes_completas(self):
+        return f"{super().exibir_informacoes()}, Saldo: R${self.saldo:.2f}"
+
+# 3. Classes para herança múltipla
+class Autenticacao:
+    def login(self):
+        return "Usuário autenticado"
+    
+    def status(self):
+        return "Status da autenticação: Ativo"
+
+class Permissao:
+    def verificar_permissao(self):
+        return "Permissão verificada"
+    
+    def status(self):
+        return "Status da permissão: Concedida"
+
+# 4. Classe Administrador com herança múltipla
+class Administrador(Autenticacao, Permissao):
+    def __init__(self, nome, email, nivel_acesso):
+        self.nome = nome
+        self.email = email
+        self.nivel_acesso = nivel_acesso
+    
+    def exibir_info_admin(self):
+        return f"Admin: {self.nome}, Nível: {self.nivel_acesso}"
+
+# 5. Hierarquia de classes: Usuario -> Funcionario -> Gerente
+class Funcionario(Usuario):
+    def __init__(self, nome, email, salario):
+        super().__init__(nome, email)
+        self.salario = salario
+    
+    def saudacao(self):
+        return "Olá, funcionário"
+    
+    def exibir_informacoes(self):
+        return f"{super().exibir_informacoes()}, Salário: R${self.salario:.2f}"
+
+class Gerente(Funcionario):
+    def __init__(self, nome, email, salario, departamento):
+        super().__init__(nome, email, salario)
+        self.departamento = departamento
+    
+    def saudacao(self):
+        return "Olá, gerente"
+    
+    def exibir_informacoes(self):
+        return f"{super().exibir_informacoes()}, Departamento: {self.departamento}"
+
+# Função para entrada de dados com validação
+def input_float(mensagem):
+    while True:
+        try:
+            valor = float(input(mensagem))
+            return valor
+        except ValueError:
+            print("Por favor, digite um valor numérico válido.")
+
+def input_int(mensagem):
+    while True:
+        try:
+            valor = int(input(mensagem))
+            return valor
+        except ValueError:
+            print("Por favor, digite um número inteiro válido.")
+
+# Demonstração do código com inputs
+if __name__ == "__main__":
+    print("=== SISTEMA DE CADASTRO DE USUÁRIOS ===")
+    print("\nVamos criar diferentes tipos de usuários:")
+    
+    # 1. Cadastro de Cliente
+    print("\n" + "="*50)
+    print("1. CADASTRO DE CLIENTE")
+    print("="*50)
+    
+    nome_cliente = input("Digite o nome do cliente: ")
+    email_cliente = input("Digite o email do cliente: ")
+    saldo_cliente = input_float("Digite o saldo do cliente: R$ ")
+    
+    cliente = Cliente(nome_cliente, email_cliente, saldo_cliente)
+    
+    print(f"\n✅ Cliente cadastrado com sucesso!")
+    print(f"📋 Informações: {cliente.exibir_informacoes_completas()}")
+    print(f"👋 Saudação: {cliente.saudacao()}")
+    
+    # 2. Cadastro de Funcionário e Gerente
+    print("\n" + "="*50)
+    print("2. CADASTRO DE FUNCIONÁRIO E GERENTE")
+    print("="*50)
+    
+    nome_funcionario = input("Digite o nome do funcionário: ")
+    email_funcionario = input("Digite o email do funcionário: ")
+    salario_funcionario = input_float("Digite o salário do funcionário: R$ ")
+    
+    funcionario = Funcionario(nome_funcionario, email_funcionario, salario_funcionario)
+    
+    print(f"\n✅ Funcionário cadastrado com sucesso!")
+    print(f"📋 Informações: {funcionario.exibir_informacoes()}")
+    print(f"👋 Saudação: {funcionario.saudacao()}")
+    
+    # Cadastro de Gerente
+    print("\n" + "-"*30)
+    print("Agora, vamos cadastrar um GERENTE:")
+    
+    nome_gerente = input("Digite o nome do gerente: ")
+    email_gerente = input("Digite o email do gerente: ")
+    salario_gerente = input_float("Digite o salário do gerente: R$ ")
+    departamento_gerente = input("Digite o departamento do gerente: ")
+    
+    gerente = Gerente(nome_gerente, email_gerente, salario_gerente, departamento_gerente)
+    
+    print(f"\n✅ Gerente cadastrado com sucesso!")
+    print(f"📋 Informações: {gerente.exibir_informacoes()}")
+    print(f"👋 Saudação: {gerente.saudacao()}")
+    
+    # 3. Cadastro de Administrador (herança múltipla)
+    print("\n" + "="*50)
+    print("3. CADASTRO DE ADMINISTRADOR")
+    print("="*50)
+    
+    nome_admin = input("Digite o nome do administrador: ")
+    email_admin = input("Digite o email do administrador: ")
+    nivel_acesso = input("Digite o nível de acesso do administrador: ")
+    
+    admin = Administrador(nome_admin, email_admin, nivel_acesso)
+    
+    print(f"\n✅ Administrador cadastrado com sucesso!")
+    print(f"🔐 Autenticação: {admin.login()}")
+    print(f"🔑 Permissão: {admin.verificar_permissao()}")
+    print(f"📊 Status: {admin.status()}")
+    print(f"👤 Informações: {admin.exibir_info_admin()}")
+    
+    # 4. Mostrar MRO (Method Resolution Order)
+    print("\n" + "="*50)
+    print("4. ORDEM DE RESOLUÇÃO DE MÉTODOS (MRO)")
+    print("="*50)
+    
+    print("A ordem em que Python busca os métodos é:")
+    for i, classe in enumerate(Administrador.__mro__, 1):
+        print(f"{i}. {classe}")
+    
+    # 5. Demonstração do polimorfismo
+    print("\n" + "="*50)
+    print("5. DEMONSTRAÇÃO DE POLIMORFISMO")
+    print("="*50)
+    
+    # Perguntar se quer adicionar mais usuários
+    usuarios_cadastrados = [cliente, funcionario, gerente]
+    
+    while True:
+        adicionar = input("\nDeseja adicionar outro usuário genérico? (s/n): ").lower()
+        if adicionar == 's':
+            nome_user = input("Digite o nome do usuário: ")
+            email_user = input("Digite o email do usuário: ")
+            usuario_generico = Usuario(nome_user, email_user)
+            usuarios_cadastrados.append(usuario_generico)
+            print("✅ Usuário adicionado!")
+        else:
+            break
+    
+    # Mostrar todos os usuários cadastrados
+    print(f"\n📊 RESUMO DE TODOS OS {len(usuarios_cadastrados)} USUÁRIOS CADASTRADOS:")
+    print("-" * 60)
+    
+    for i, usuario in enumerate(usuarios_cadastrados, 1):
+        print(f"\n{i}. {usuario.saudacao()}")
+        print(f"   {usuario.exibir_informacoes()}")
+        print(f"   Tipo: {type(usuario).__name__}")
+    
+    # 6. Operações com o cliente
+    print("\n" + "="*50)
+    print("6. OPERAÇÕES BANCÁRIAS DO CLIENTE")
+    print("="*50)
+    
+    print(f"Saldo atual do cliente {cliente.nome}: R${cliente.saldo:.2f}")
+    
+    while True:
+        print("\nOpções:")
+        print("1 - Depositar")
+        print("2 - Sacar")
+        print("3 - Ver saldo")
+        print("0 - Sair")
+        
+        opcao = input("Escolha uma opção: ")
+        
+        if opcao == '1':
+            valor = input_float("Digite o valor para depositar: R$ ")
+            cliente.saldo += valor
+            print(f"✅ Depósito realizado! Novo saldo: R${cliente.saldo:.2f}")
+        
+        elif opcao == '2':
+            valor = input_float("Digite o valor para sacar: R$ ")
+            if valor <= cliente.saldo:
+                cliente.saldo -= valor
+                print(f"✅ Saque realizado! Novo saldo: R${cliente.saldo:.2f}")
+            else:
+                print("❌ Saldo insuficiente!")
+        
+        elif opcao == '3':
+            print(f"💰 Saldo atual: R${cliente.saldo:.2f}")
+        
+        elif opcao == '0':
+            print("Saindo do sistema...")
+            break
+        
+        else:
+            print("❌ Opção inválida!")
+    
+    print("\n" + "="*50)
+    print("🎉 PROGRAMA FINALIZADO COM SUCESSO!")
+    print("Obrigado por usar o sistema de cadastro!")
