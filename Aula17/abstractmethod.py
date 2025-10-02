@@ -64,3 +64,49 @@ print(bicicleta.frear())     # Saída: A bicicleta está freando
 # veiculo = Veiculo()  # Isso causará um erro, pois não podemos instanciar uma classe abstrata
 # veiculo.acelerar()    # Isso também causará um erro, pois o método é abstrato
 # veiculo.frear()      # Isso também causará um erro, pois o método é abstrato
+  
+
+class Pessoa(ABC):
+    @abstractmethod
+    def falar(self):
+        return "A pessoa está falando"
+    @abstractmethod
+    def andar(self):
+        return "A pessoa está andando"
+    @abstractmethod
+    def comer(self):
+        return "A pessoa está comendo"
+    
+class funcionario(Pessoa):
+    def falar(self):
+        return super().falar()
+    def andar(self):
+        return super().andar()
+    def comer(self):
+        return super().comer()
+    def trabalhar(self):
+        return "O funcionário está trabalhando"
+
+class aluno(Pessoa):
+    def falar(self):
+        return super().falar()
+    def andar(self):
+        return super().andar()
+    def comer(self):
+        return super().comer()
+    def estudar(self):
+        return "O aluno está estudando"
+
+funcionario = funcionario()
+aluno = aluno()
+print(funcionario.falar())
+print(funcionario.andar())
+print(funcionario.comer())
+print(aluno.falar())
+print(aluno.andar())
+print(aluno.comer())
+print(funcionario.trabalhar())
+print(aluno.estudar())
+# pessoa = Pessoa()  # Isso causará um erro, pois não podemos instanciar
+
+    
