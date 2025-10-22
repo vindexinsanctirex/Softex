@@ -27,4 +27,23 @@ alunos = cursor.fetchall()
 for aluno in alunos:
     print(aluno)
 # fechando a conexao
+# conexao.close()
+
+# outros exemmplos de sql com python
+# atualizando dados
+cursor.execute('''
+UPDATE alunos SET idade = 22 WHERE id = 2
+''')
+# excluindo dados
+cursor.execute('''
+DELETE FROM alunos WHERE id = 3
+''')
+# salvando as alterações
+conexao.commit()
+# consultando dados novamente
+cursor.execute('SELECT * FROM alunos')
+alunos = cursor.fetchall()
+for aluno in alunos:
+    print(aluno)
+# fechando a conexao
 conexao.close()
